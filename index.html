@@ -19,6 +19,8 @@
 			padding: 0; height:auto;
 				}
 		.topline { position: absolute; top: 0; left: 0; background-color: #000; font-size: 20px; color: #999; font-family: "Merriweather Sans",sans-serif; font-weight: 800; padding: 4px 20px; width: 100%; }
+		.topimg { position: relative; height: 100%; }
+		.topimg img { position: absolute; left: 200px; bottom: -4px; height: 40px; }
 		.maps { font-family: "Bodoni Moda",serif; position: relative; display: flex; overflow: visible; min-height: 90vw; margin:20px 0 12px; }
 		.map { position: absolute; top: 0; left: 0; display: none;  }
 		.map img { width: 100%; }
@@ -73,7 +75,7 @@
 	</style>
 </head>
   <body>
-	  <div class="topline">Mt. Hood Glaciers</div>
+	  <div class="topline">Mt. Hood Glaciers <div class="topimg"><img src="images/hood_profile.png" /></div></div>
 	<div class="containr">
 		<h1>The Big Melt</h1>
 		<div class="content explain">
