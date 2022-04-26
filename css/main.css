@@ -10,9 +10,8 @@ article { font-size: 1.2rem; line-height: 1.8;  }
 .map { position: absolute; top: 0; left: 0; display: none;  }
 .map img { width: 100%; }
 .container { position: relative; margin: 100px auto; overflow: visible; padding: 0;  }
-.content { font-family: "Merriweather Sans",sans-serif; }
-.content { font-weight: 300; }
-.content p { margin: 10px 0; line-height: 200%; max-width: 900px; margin:auto; padding: 0 15px; }
+.content { font-family: "Merriweather Sans",sans-serif; font-weight: 300; }
+.content p { margin: 20px auto; line-height: 200%; max-width: 900px; padding: 0 15px; }
 .hedbox { position: sticky; top: 20px; left: 20px; z-index: 100; padding: 10px 15px 6px; background-color: rgba(255,255,255,.8); border-radius: 5px; margin-top:20px; height:90px;}
 h1,h2,h3 { font-family: "Bodoni Moda",serif; font-weight: 800; letter-spacing: -1px; }
 h3 { letter-spacing: inherit; font-size: 18px; }
@@ -47,7 +46,7 @@ h2 { font-size: 2rem; text-align: left; }
 .credline { font-size: 14px; color: #888; }
 .map_3d { margin-top: 0; }
 .explore { font-weight: bold; text-align: center; margin-bottom: 20px; }
-.explore i { animation: pulse 1.5s ease infinite; color: #c00; margin-left: 5px; }
+.explore i { animation: pulse 2.5s ease infinite; color: #c00; margin-left: 5px; }
 .ux { font-size:12px; text-align: center; font-weight: bold; }
 .ux i { margin-right: 5px; color: white; }
 .sources p { font-size: 14px; margin-bottom: 15px;  }
