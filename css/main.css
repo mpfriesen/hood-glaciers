@@ -26,7 +26,7 @@ h2 { font-size: 2rem; text-align: left; }
 .scroller .scroller-graphic { width: 100%; position: sticky; position: -webkit-sticky; top: 46px; z-index: -1;  }
 .scroller-image { position:relative; height: calc(100vh - 46px); background-color: #000; overflow: hidden; }
 .scroller-image img { height: calc(100vh - 46px); width: auto; left: 50%; transform: translateX(-50%); }
-.step { z-index: 1; max-width: 250px; margin: 0 auto; }
+.step { z-index: 1; max-width: 250px; margin: 0 auto; padding-bottom: 75vh; }
 .step-hide { visibility: hidden; }
 .step-content { background-color: rgba(225,225,225,.9); border: 1px solid #aaa; padding: 5px 20px; margin: 20px; box-shadow: 0 4px 2px -2px rgba(0,0,0,.25), 0 0 2px rgba(0,0,0,.15); font-family: "PT Sans",sans-serif; text-align: center; font-weight: bold;  }
 .larger { font-size: 25px; }
@@ -39,7 +39,6 @@ h2 { font-size: 2rem; text-align: left; }
 .map_button:hover { cursor: pointer; background-color:#444; }
 .map_button.active:hover { background-color: #333; }
 .mapboxgl-ctrl-top-right { top: 40px; }
-.step { padding-bottom: 75vh; }
 .step div { line-height: 1.8; background-color: #eee; color: #999; font-size: 20px; font-weight: 800; }
 .storybox p { padding: 25px; border-top: 3px solid #aaa; }
 .right { width: 33vw; margin-left: 62vw; }
@@ -67,4 +66,11 @@ figcaption { font-size: 14px; text-align: center; }
     transform: scale(1.5);
     opacity: 0;
   }
+}
+@media only screen and (max-width: 450px) { 
+  h1 { font-size: 2.8rem; }
+  .step { width: 90vw; max-width: inherit; }
+  .right { margin-left: 5vw; }
+  .step div { font-size: 15px; }
+  .by_cred { margin-top: 15px; }
 }
