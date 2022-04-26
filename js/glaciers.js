@@ -24,6 +24,7 @@
 		zoom: 13.49,
 		pitch: 0.00,
 		bearing: 0.00,
+		interactive: false,
 		style: 'mapbox://styles/mfriesenwisc/cl2dymc4900rc14o91n0f4xsq'
 	});
 	
