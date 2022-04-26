@@ -3,206 +3,144 @@
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/4b7b7915d1.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/0c79f7c9c8.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/jquery.beforeafter-1.4.responsive.min.js"></script>
-  <script src="js/jquery.ui.touch-punch.min.js"></script>  
+  <script src="js/jquery.ui.touch-punch.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+  <script src="https://unpkg.com/scrollama"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,800;1,500&family=Merriweather+Sans:ital,wght@0,300;0,800;1,300&display=swap" rel="stylesheet">
-<!--   <link href="css/enviro.css" rel="stylesheet" /> -->
-  <title>Climate ambition</title>
+  
+  <title>Mt Hood's glaciers</title>
 	<style>
-		body { 
-			width: 100%; 
-			margin:0 auto;
-			padding: 0; height:auto;
-				}
-		.topline { position: absolute; top: 0; left: 0; background-color: #000; font-size: 20px; color: #999; font-family: "Merriweather Sans",sans-serif; font-weight: 800; padding: 4px 20px; width: 100%; }
-		.topimg { position: relative; height: 100%; }
-		.topimg img { position: absolute; left: 200px; bottom: -4px; height: 40px; }
-		.maps { font-family: "Bodoni Moda",serif; position: relative; display: flex; overflow: visible; min-height: 91vw; margin:20px 0 12px; }
-		.map { position: absolute; top: 0; left: 0; display: none;  }
-		.map img { width: 100%; }
-		.containr { position: relative; margin: 0 auto; overflow: visible; margin-top: 60px; }
-		h1,.content { max-width: 900px; margin: 0 auto; padding: 0 20px; font-family: "Merriweather Sans",sans-serif; }
-		.content { font-weight: 300; }
-		.content p { margin: 10px 0; line-height: 180%; }
-		.hedbox { position: sticky; top: 20px; left: 20px; z-index: 100; padding: 10px 15px 6px; background-color: rgba(255,255,255,.8); border-radius: 5px; margin-top:20px; height:90px;}
-		h1,h2,h3 { font-weight: 800; letter-spacing: -1px;  }
-		h3 { letter-spacing: inherit; font-size: 18px; }
-		h1 { font-size: 4rem; text-align: center; }
-		h2 { font-size: 2rem; text-align: left; }
-		.explain hr { width: 50%; margin: 15px 25% 30px; }
-		.glacier { position: absolute; width: calc(100vw / 100); height: calc(100vw / 100); min-width: 8px; min-height: 8px; background-color: #c00;z-index: 100; border-radius: 50%; border: 1px solid white; box-shadow: 2px 2px 2px rgba(0,0,0,.5); }
-		.glacier:hover { cursor: pointer; border-color: #ccc; box-shadow: 2px 2px 2px rgba(0,0,0,.8)}
-		.g-palmer { left: 38.4%; top: 75.6%; }
-		.g-zigzag { left: 36%; top: 61%; }
-		.g-whiteriver { left: 45%; top: 74%; }
-		.g-newton { left: 57%; top: 53%; }
-		.g-eliot { left: 63%; top: 35%; }
-		.g-sandy { left: 32%; top: 36%; }
-		.wire-3d { position: relative; width: 100%; height: 400px; background-color: #ccc;}
-		.wire-3d div { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-weight: 800; color: #666}
-		.glac_box { width: 250px; position: fixed; left: 50%; top: 50%; background-color:rgba(255,255,255,.9);  z-index:200; font-family: "Merriweather Sans",sans-serif; padding: 20px 15px 15px; max-height: calc(100vw - 145px); border-radius: 5px; box-shadow: 4px 4px 4px rgba(0,0,0,.4); transform: translate(-50%, -50%); display: none; }
-		.glac_box p { font-size: 11px; }
-		.hide_box { color: #bbb; font-weight: bold; text-transform: uppercase;font-size: 10px; }
-		.hide_box { position: absolute; top: 6px; right: 6px;  }
-		.hide_box i { font-size: 14px; vertical-align: -7%; }
-		.hide_box:hover { cursor:pointer; color: #aaa; }
-		.bt { display: inline-block; margin-right: 5px; font-family: "Merriweather Sans",sans-serif; font-size: 13px; font-weight: 800; color: #777; }
-		.circ,.circ2 { width: 10px; height: 10px; background-color: cornflowerblue; display: inline-block;border-radius: 50%; }
-		.bt:hover { cursor: pointer; }
-		.circ2 { margin: 0 4px 0 -10px; }
-		.bt.hover .circ,.bt.active .circ { background-color: #900; }
-		.bt.active { color: #000; }
-		.bt.active .circ2 { visibility: hidden; }
-		.bt.hover .circ2 {  background-color: #900; animation: pulse 1.5s ease infinite; }
-		figcaption { margin:3px 0 30px; font-size: 90%; font-weight: 800; color: #555; }
-		#ba-container { width: 100%; margin: 30px auto 0; }
-		@keyframes pulse {
-		  0% {
-			  transform: scale(1, 1);
-			}
-			50% {
-			  opacity: 0.3;
-			}
-			100% {
-			  transform: scale(1.5);
-			  opacity: 0;
-			}
-		}
 	</style>
 </head>
   <body>
 	  <div class="topline">
-		  Mt. Hood Glaciers 
+		  Mt. Hood&rsquo;s Glaciers 
 		  <div class="topimg">
 			  <img src="images/hood_profile.png" />
 		  </div>
 	  </div>
-	<div class="containr">
-		<h1>The Big Melt</h1>
-		<div class="content explain">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel rutrum risus. Sed feugiat quis turpis vitae faucibus. Sed ultricies malesuada diam, nec aliquet dui. Proin metus nisl, facilisis sed velit a, scelerisque blandit velit. Ut quis ligula egestas, imperdiet mauris a, luctus lectus. Vestibulum viverra lectus sollicitudin, cursus neque nec, venenatis libero. Suspendisse rutrum semper volutpat. Donec in lorem feugiat, pellentesque nibh sollicitudin, lacinia metus.</p>
-			<hr/>
-		</div>
-		<div class="maps">
-			<div class="hedbox">
-				<h2>Mt. Hood&rsquo;s shrinking glaciers</h2>
-				<div class="selectors">
-					<div class="bt bt_1" data-img="1">
-						<div class="circ"></div><div class="circ2"></div> Historic outlines
-					</div>
-					<div class="bt bt_2" data-img="2">
-						<div class="circ"></div><div class="circ2"></div> Current outlines
-					</div>
-					<div class="bt bt_3" data-img="3">
-						<div class="circ"></div><div class="circ2"></div> Glacier loss
+	<article>
+	<div id="container">
+		<div class="container">
+			<div class="story_block">
+				<h1>Disappearing Ice</h1>
+				
+				<div class="by_cred">
+					<div class="byline">Mark Friesen</div>
+					<div class="credline">
+						<div>Geography 778, Spring 2022</div>
+						<div>University of Wisconsin - Madison</div>
 					</div>
 				</div>
-			</div>
-			<div class="glacier g-palmer" data-glacier="palmer"></div>
-			<div class="glacier g-zigzag" data-glacier="zigzag"></div>
-			<div class="glacier g-whiteriver" data-glacier="whiteriver"></div>
-			<div class="glacier g-newton" data-glacier="newton"></div>
-			<div class="glacier g-eliot" data-glacier="eliot"></div>
-			<div class="glacier g-sandy" data-glacier="sandy"></div>
-			
-									
-			<div class="glac_box">
-				<div class="hide_box">Dismiss <i class='fas fa-times-circle'></i></div>
-				<h3>Zigzag Glacier</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel rutrum risus. Sed feugiat quis turpis vitae faucibus. Sed ultricies malesuada diam, nec aliquet dui.</p>
-				<p> Proin metus nisl, facilisis sed velit a, scelerisque blandit velit. Ut quis ligula egestas, imperdiet mauris a, luctus lectus.</p>
-			</div>
-			<div class="map map_1">
-				<img src="images/topo_outline.jpg" />
-			</div>
-			<div class="map map_2">
-				<img src="images/new_outline.jpg" />
-			</div>
-			<div class="map map_3">
-				<img src="images/topo_loss.jpg" />
-			</div>
-			
-		</div>
-		<div class="content">
-			<figcaption>USGS Topo Map, 1962</figcaption>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel rutrum risus. Sed feugiat quis turpis vitae faucibus. Sed ultricies malesuada diam, nec aliquet dui. Proin metus nisl, facilisis sed velit a, scelerisque blandit velit. Ut quis ligula egestas, imperdiet mauris a, luctus lectus. Vestibulum viverra lectus sollicitudin, cursus neque nec, venenatis libero. Suspendisse rutrum semper volutpat. Donec in lorem feugiat, pellentesque nibh sollicitudin, lacinia metus.</p>
-			
-			<p>In hac habitasse platea dictumst. Sed et iaculis nulla. Sed dictum, odio non tempor dignissim, leo erat finibus lorem, quis semper arcu augue nec neque. Proin justo ligula, eleifend ut mattis nec, aliquam nec dolor. Donec ut blandit urna, eget laoreet nisl. Praesent at metus egestas, tincidunt nulla ac, bibendum quam. Morbi at efficitur sapien. Curabitur at sapien ornare, pulvinar ex non, pharetra elit. Suspendisse semper interdum nibh id finibus.</p>		
-			
-		</div>
-		<div id="ba-container">
-			 <div>
-				 <img alt="before" src="images/eliot_1901.jpg" style="width:100%; height: calc(100vw * .6235);"  />
-			 </div>
-			 <div>
-				 <img alt="after" src="images/eliot_2021.jpg" style="width:100%; height: calc(100vw * .6235)";  />
-			 </div>
-			
-		</div>
 				
-		<div class="content">
-			<figcaption>Eliot Glacier in 1901 and 2021</figcaption>
-			<p>Morbi a tortor lorem. Vivamus luctus quis elit nec interdum. Curabitur ac mauris maximus, porta felis nec, semper turpis. Vivamus maximus nisl et tortor ullamcorper, eget gravida sapien mattis. Mauris euismod quis lectus id mollis. Pellentesque pellentesque semper tortor, quis feugiat sem sodales tristique. Phasellus quis metus placerat justo cursus tempus. Pellentesque arcu nisi, rutrum in libero sed, pretium imperdiet ex.</p>
-			
-			<p>Aliquam facilisis semper nisl vitae placerat. Sed dictum malesuada nibh, sit amet posuere lorem bibendum ut. Praesent vel tristique nulla. Integer euismod ante eu metus egestas vehicula. Aliquam dapibus dui et massa viverra, nec sagittis ante sodales. Mauris interdum gravida urna, euismod pretium ligula porttitor non. Aliquam ornare semper elementum. Nam fringilla egestas semper. Aliquam eu massa ornare quam cursus eleifend ac nec diam. Mauris vehicula lorem ex, vel lacinia nunc tempus quis. Duis interdum elementum enim, sit amet aliquam nunc porttitor nec. Etiam ex arcu, dapibus nec fermentum non, pellentesque sed libero. Donec at metus nec augue egestas maximus vel ac felis. Morbi sagittis urna id dignissim gravida. Quisque et eros vel mi laoreet facilisis. In commodo ex velit, eu blandit elit interdum at.</p>
-			
-		</div>
-		
-		<div class="wire-3d"><div>3D interactive map TK</div></div>
-			
-		<div class="content">
-			<p>Morbi ante purus, imperdiet eget felis sit amet, accumsan cursus ex. Nam purus erat, ullamcorper vel est in, efficitur feugiat nunc. Fusce urna orci, feugiat eu nisi vitae, finibus sagittis tortor. Nulla luctus lectus sed ultrices facilisis. Nullam eget augue aliquet, hendrerit ex pellentesque, efficitur turpis. Vivamus venenatis tortor in leo placerat, eget egestas enim sollicitudin. Pellentesque maximus sem id tellus pellentesque gravida.</p>
-			
-			<p>Morbi a tortor lorem. Vivamus luctus quis elit nec interdum. Curabitur ac mauris maximus, porta felis nec, semper turpis. Vivamus maximus nisl et tortor ullamcorper, eget gravida sapien mattis. Mauris euismod quis lectus id mollis. Pellentesque pellentesque semper tortor, quis feugiat sem sodales tristique. Phasellus quis metus placerat justo cursus tempus. Pellentesque arcu nisi, rutrum in libero sed, pretium imperdiet ex.</p>
+				<div class="content explain">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel rutrum risus. Sed feugiat quis turpis vitae faucibus. Sed ultricies malesuada diam, nec aliquet dui. Proin metus nisl, facilisis sed velit a, scelerisque blandit velit. Ut quis ligula egestas, imperdiet mauris a, luctus lectus. Vestibulum viverra lectus sollicitudin, cursus neque nec, venenatis libero. Suspendisse rutrum semper volutpat. Donec in lorem feugiat, pellentesque nibh sollicitudin, lacinia metus.</p>
+					<div class="panel">
+						<figure>
+							<img src="images/hood_panel.png" />
+							<figcaption>False-color imagery of Mt. Hood from Landsat 5, 7 (bands 5,4,3) and Landsat 8 (bands 6,5,4) captured in late summer.</figcaption>
+						</figure>
 						
-			<p>Aliquam facilisis semper nisl vitae placerat. Sed dictum malesuada nibh, sit amet posuere lorem bibendum ut. Praesent vel tristique nulla. Integer euismod ante eu metus egestas vehicula. Aliquam dapibus dui et massa viverra, nec sagittis ante sodales. Mauris interdum gravida urna, euismod pretium ligula porttitor non. Aliquam ornare semper elementum. Nam fringilla egestas semper. Aliquam eu massa ornare quam cursus eleifend ac nec diam. Mauris vehicula lorem ex, vel lacinia nunc tempus quis. Duis interdum elementum enim, sit amet aliquam nunc porttitor nec. Etiam ex arcu, dapibus nec fermentum non, pellentesque sed libero. Donec at metus nec augue egestas maximus vel ac felis. Morbi sagittis urna id dignissim gravida. Quisque et eros vel mi laoreet facilisis. In commodo ex velit, eu blandit elit interdum at.</p>
-			
+					</div>
+				</div>
+				<div class="hr"></div>
+				
+				<div class="map_story">
+					<div id="storymap"></div>
+					<div id="story" class="sticky">
+						<div id="features">
+							<div id="glac56" class="step right box_0" data-scrollama-index="0" data-step="glac_56">
+								<div class="storybox">
+									<p>The USGS topo map of Mt. Hood from 1962 had glacier extents drawn in <span class="red">1956,</span> showing more than <span class="red">22 square kilometers</span> covered by glaciers.</p>
+								</div>
+							</div>
+							<div id="topo20" class="step right box_1" data-scrollama-index="1" data-step="topo20">
+								<div class="storybox">
+									<p>In the 2020 map, 58 years later, the extents are <span class="red">unchanged.</span></p>
+								</div>
+							</div>
+							<div id="glac21" class="step right box_2" data-scrollama-index="5" data-step="glac_21">
+								<div class="storybox">
+									<p>In reality, glaciers today cover fewer than <span class="red">8 square kilometers</span> of the peak, a loss of <span class="red">66 percent.</span></p>
+								</div>
+							</div>
+							<div id="zigzag" class="step right box_3" data-scrollama-index="3" data-step="zigzag_56">
+								<div class="storybox">
+									<p>In 1956, the <span class="black">Zigzag Glacier</span> was the largest on the mountain at more than <span class="red">3 square kilometers.</span></p>
+								</div>
+							</div>
+							<div id="zigzag21" class="step right box_4" data-scrollama-index="4" data-step="zigzag_21">
+								<div class="storybox">
+									<p>It&rsquo;s now at 395,000 square meters, a loss of more than <span class="red">87 percent.</span></p>
+								</div>
+							</div>
+							<div id="sandy" class="step right box_5" data-scrollama-index="5" data-step="sandy_56">
+								<div class="storybox">
+									<p>Sixty-five years ago, the <span class="black">Sandy Glacier</span> was more than <span class="red">1.4 million square meters.</span></p>
+								</div>
+							</div>
+							<div id="sandy21" class="step right box_6" data-scrollama-index="6" data-step="sandy_21">
+								<div class="storybox">
+									<p>It&rsquo;s now shrunk nearly <span class="red">60 percent</span> to <span class="black">592,000 square meters.</span></p>
+								</div>
+							</div>
+							<div id="palmer" class="step right box_7" data-scrollama-index="7" data-step="palmer_56">
+								<div class="storybox">
+									<p>The famous <span class="black">Palmer Glacier</span> near Timberline Lodge was once more than a million square meters.</p>
+								</div>
+							</div>
+							<div id="palmer21" class="step right box_8" data-scrollama-index="8" data-step="palmer_21">
+								<div class="storybox">
+									<p>At <span class="black">98,000 square meters</span> today, <span class="red">91 percent</span> smaller, it is little more than a snowfield and no longer meets the scientific definition of a glacier.</p>
+								</div>
+							</div>
+							
+						</div>
+						
+						
+						
+					</div>
+				</div>
+				
+				<div class="content">
+					<div class='explore'>Explore the map on your own <i class="fa-solid fa-circle-down"></i></div>
+					<div class="ux"><i class="fa-solid fa-hand-pointer"></i> Hold down the control key and click and drag the mouse to change the map&rsquo;s pitch and bearing.</div>
+					
+					<div class="map_3d">
+						<div id="map">
+							<div class="glacier_buttons">
+								<div id="glac_56" class="map_button left_button active">Show 1956 glacier extents</div>
+								<div id="glac_21" class="map_button mid_button">Show 2021 glacier extents</div>
+								<div id="glac_all" class="map_button right_button">Show both</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="sources">
+						<p><strong>Note</strong>: New glacier extents were drawn manually to a best approximation using the following sources: 1-foot resolution orthorectified aerial imagery produced by the state of Oregon in 2018, hillshade created from a 1/9 arc-second Digital Elevation Model from USGS, Normalized Difference Snow Index images derived from Landsat 8 and Sentinel-2 satellite data captured in August 2021, and a Land Surface Temperature image created from Landsat 8 data from August 2021.</p>
+					</div>
+					
+					<div class="sources"><p>Sources: <a href="http://glims.colorado.edu/glacierdata/">GLIMS Glacier Database</a>, U.S. Geological Survey; <a href="https://www.orglaciersinst.org/">Oregon Glaciers Institute</a>; <a href="https://glaciers.us/glaciers.research.pdx.edu/index.html">Glaciers of the American West</a>, Portland State University; Landsat data from NASA/USGS; Sentinel-2 data from the European Space Agency; Open Street Map; Dr. Andrew Fountain, Portland State University; <a href="https://www.oregon.gov/geo/Pages/imagery.aspx">Oregon Statewide Imagery Program</a>; <a href="https://www.oregongeology.org/">Oregon Department of Geology and Mineral Industries</a></p></div>
+					
+					
+					
+				</div>
+			</div>
 		</div>
 	</div>
 		
 		
-	<script>
-		const glaciers = { "zigzag": {"name": "Zigzag Glacier"},"zigzag": {"name": "Zigzag Glacier"},"newton": {"name": "Newton-Clark Glacier"},"palmer": {"name": "Palmer Glacier"},"whiteriver": {"name": "White River Glacier"},"sandy": {"name": "Sandy Glacier"},"eliot": {"name": "Eliot Glacier"}};
-	
-		$(".bt").hover(function() {
-			$(this).toggleClass("hover");
-		})
-		function mapSwitch(mapnum) {
-			$(".bt").removeClass("active");
-			$(".bt_"+mapnum).addClass("active");
-			$(".map").hide();
-			$(".map_"+mapnum).show();
-			return false;
-		}
-		mapSwitch(1);
-		$(".bt").click(function(e) {
-			e.preventDefault();
-			var mapnum = $(this).data("img");
-			mapSwitch(mapnum);
-			return false;
-		})
 		
-		$(".glacier").click(function() {
-			var g_name = glaciers[$(this).data("glacier")].name;
-			$(".glac_box h3").text(g_name);
-			$(".glac_box").show();
-		})
 		
-		$(".hide_box").on('click',function() {
-			$(".glac_box").hide();
-		});
-	
-		$(function(){
-			$('#ba-container').beforeAfter({
-				showFullLinks: false
-			});
-		});
-	
-	</script>	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		
+	<script src="js/config.js"></script>	
+	<script src="js/glaciers.js"></script>
   </body>
 </html>
