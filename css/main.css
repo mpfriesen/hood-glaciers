@@ -1,0 +1,70 @@
+body { width: 100%; margin:0 auto; padding: 0; height:auto; color: #ccc; background-color: #000; font-family: "Merriweather Sans",sans-serif; }
+article { font-size: 1.2rem; line-height: 1.8;  }
+.topline { position: fixed; top: 0; left: 0; background-color: #000; font-size: 20px; color: #999; font-family: "Merriweather Sans",sans-serif; font-weight: 800; padding: 12px 20px 4px; width: 100%; z-index: 101; border-bottom: 1px solid #666; }
+.topimg { position: relative; height: 100%; }
+.topimg img { position: absolute; left: 200px; bottom: -4px; height: 40px; }
+#map,#storymap { width: 100vw; height: calc(100vh - 47px);   }
+#map { margin-top: 20px; }
+#storymap { top:42px; position: sticky;}
+.maps { font-family: "Bodoni Moda",serif;  }
+.map { position: absolute; top: 0; left: 0; display: none;  }
+.map img { width: 100%; }
+.container { position: relative; margin: 100px auto; overflow: visible; padding: 0;  }
+.content { font-family: "Merriweather Sans",sans-serif; }
+.content { font-weight: 300; }
+.content p { margin: 10px 0; line-height: 200%; max-width: 900px; margin:auto; padding: 0 15px; }
+.hedbox { position: sticky; top: 20px; left: 20px; z-index: 100; padding: 10px 15px 6px; background-color: rgba(255,255,255,.8); border-radius: 5px; margin-top:20px; height:90px;}
+h1,h2,h3 { font-family: "Bodoni Moda",serif; font-weight: 800; letter-spacing: -1px; }
+h3 { letter-spacing: inherit; font-size: 18px; }
+h1 { font-size: 4rem; text-align: center; margin: 0; }
+h2 { font-size: 2rem; text-align: left; }
+.hr { width: 50%; margin: 15px 25% 30px; border-top: 1px solid #2188aa; }
+.glacier { position: absolute; width: calc(100vw / 100); height: calc(100vw / 100); min-width: 8px; min-height: 8px; background-color: #c00;z-index: 100; border-radius: 50%; border: 1px solid white; box-shadow: 2px 2px 2px rgba(0,0,0,.5); }
+.sticky {  position: sticky; position: -webkit-sticky; top: 0; }
+.full-wide { width: 100%; position: relative; left: 50%; right: 50%; }
+.scroller { width: 100vw; margin: 0 -50vw 30px -50vw; z-index: 1;  }
+.scroller .scroller-graphic { width: 100%; position: sticky; position: -webkit-sticky; top: 46px; z-index: -1;  }
+.scroller-image { position:relative; height: calc(100vh - 46px); background-color: #000; overflow: hidden; }
+.scroller-image img { height: calc(100vh - 46px); width: auto; left: 50%; transform: translateX(-50%); }
+.step { z-index: 1; max-width: 250px; margin: 0 auto; }
+.step-hide { visibility: hidden; }
+.step-content { background-color: rgba(225,225,225,.9); border: 1px solid #aaa; padding: 5px 20px; margin: 20px; box-shadow: 0 4px 2px -2px rgba(0,0,0,.25), 0 0 2px rgba(0,0,0,.15); font-family: "PT Sans",sans-serif; text-align: center; font-weight: bold;  }
+.larger { font-size: 25px; }
+.red { color: #900; }
+.black { color: #000; }
+.map_3d,.map_story { position: relative; width: 100vw; margin: 50px 0; }
+.glacier_buttons { position: absolute; left: 0; top: 0; z-index: 100; width: 100%; }
+.glacier_buttons div { display: inline-block; width: 33.33%; float: left; background-color: #555; text-align: center; font-weight: bold; padding: 4px 0; font-family: "Merriweather Sans",sans-serif; color:#aaa; }
+.map_button.active { background-color: #333; color: white; }
+.map_button:hover { cursor: pointer; background-color:#444; }
+.map_button.active:hover { background-color: #333; }
+.mapboxgl-ctrl-top-right { top: 40px; }
+.step { padding-bottom: 75vh; }
+.step div { line-height: 1.8; background-color: #eee; color: #999; font-size: 20px; font-weight: 800; }
+.storybox p { padding: 25px; border-top: 3px solid #aaa; }
+.right { width: 33vw; margin-left: 62vw; }
+.by_cred { text-align: center; margin: 30px 0 15px;font-weight: 800; }
+.byline { font-size: 18px; text-transform: uppercase; }
+.credline { font-size: 14px; color: #888; }
+.map_3d { margin-top: 0; }
+.explore { font-weight: bold; text-align: center; margin-bottom: 20px; }
+.explore i { animation: pulse 1.5s ease infinite; color: #c00; margin-left: 5px; }
+.ux { font-size:12px; text-align: center; font-weight: bold; }
+.ux i { margin-right: 5px; color: white; }
+.sources p { font-size: 14px; margin-bottom: 15px;  }
+p a { color: #2188aa; font-weight: bold;}
+.panel { width: 100%; margin-top: 20px; }
+.panel img { width: 100%; }
+figcaption { font-size: 14px; text-align: center; }
+@keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
