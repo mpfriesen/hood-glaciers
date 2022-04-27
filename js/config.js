@@ -6,7 +6,23 @@ var config = {
 			title: '',
 			image: '',
 			description: '',
-			location: '',
+			location: {
+				center: [-121.69572, 45.37342],
+				zoom: 13.49,
+				pitch: 0.00,
+				bearing: 0.00
+			},
+			onChapterEnter: [
+				{
+					layer: 'topo62-shade',
+					opacity: 1
+				},
+				{
+					layer: 'topo20-shade',
+					opacity: 0
+				}
+				
+			],
 			onChapterProgress: [
 				{
 					layer: 'glac_56_fill',
@@ -27,7 +43,7 @@ var config = {
 			location: '',
 			onChapterProgress: [
 				{
-					layer: 'topo20',
+					layer: 'topo20-shade',
 					opacity: 1
 				}
 			],
@@ -38,7 +54,12 @@ var config = {
 			title: '',
 			image: '',
 			description: '',
-			location: '',
+			location: {
+				center: [-121.69572, 45.37342],
+				zoom: 13.49,
+				pitch: 0.00,
+				bearing: 0.00
+			},
 			onChapterProgress: [
 				{
 					layer: 'glac_21_fill',
@@ -47,6 +68,10 @@ var config = {
 				{
 					layer: 'glac_21',
 					opacity: 1
+				},
+				{
+					layer: 'topo62-shade',
+					opacity: 0
 				}
 			],
 		},
@@ -74,15 +99,7 @@ var config = {
 					color: '#2188aa'
 				},
 				{
-					layer: 'topo20',
-					opacity: 0
-				},
-				{
-					layer: 'mfriesenwisc-hoodtopo62',
-					opacity: 0
-				},
-				{
-					layer: 'mfriesenwisc-hoodshade',
+					layer: 'topo20-shade',
 					opacity: 0
 				},
 				{

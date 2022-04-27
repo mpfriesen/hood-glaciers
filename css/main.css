@@ -15,7 +15,7 @@ article { font-size: 1.2rem; line-height: 1.8;  }
 .hedbox { position: sticky; top: 20px; left: 20px; z-index: 100; padding: 10px 15px 6px; background-color: rgba(255,255,255,.8); border-radius: 5px; margin-top:20px; height:90px;}
 h1,h2,h3 { font-family: "Bodoni Moda",serif; font-weight: 800; letter-spacing: -1px; }
 h3 { letter-spacing: inherit; font-size: 18px; }
-h1 { font-size: 4rem; text-align: center; margin: 0; }
+h1 { font-size: 4rem; text-align: center; margin: 0; line-height: 110%; }
 h2 { font-size: 2rem; text-align: left; }
 .hr { width: 50%; margin: 15px 25% 30px; border-top: 1px solid #2188aa; }
 .glacier { position: absolute; width: calc(100vw / 100); height: calc(100vw / 100); min-width: 8px; min-height: 8px; background-color: #c00;z-index: 100; border-radius: 50%; border: 1px solid white; box-shadow: 2px 2px 2px rgba(0,0,0,.5); }
@@ -38,7 +38,7 @@ h2 { font-size: 2rem; text-align: left; }
 .map_button:hover { cursor: pointer; background-color:#444; }
 .map_button.active:hover { background-color: #333; }
 .mapboxgl-ctrl-top-right { top: 40px; }
-.step div { line-height: 1.8; background-color: #eee; color: #999; font-size: 20px; font-weight: 800; }
+.step div { line-height: 1.8; background-color: #eee; color: #999; font-size: 16px; font-weight: 800; }
 .storybox p { padding: 25px; border-top: 3px solid #aaa; }
 .right { width: 33vw; margin-left: 62vw; }
 .by_cred { text-align: center; margin: 30px 0 15px;font-weight: 800; }
