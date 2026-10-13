@@ -288,15 +288,15 @@
 		 .onStepProgress(response => {
 			var p = response.progress;
 			var chapter = config.chapters.find(chap => chap.id === response.element.id);
-			if (chapter.location) {
-				storymap['flyTo'](chapter.location);
-			  }
+			// if (chapter.location) {
+			// 	storymap['flyTo'](chapter.location);
+			//   }
 			if (chapter.onChapterProgress) {
 				chapter.onChapterProgress.forEach(function(layer) {
 					var paintProps = getLayerPaintType(layer.layer);
-					if (chapter.location) {
-						storymap['flyTo'](chapter.location);
-					}
+// 					if (chapter.location) {
+// 						storymap['flyTo'](chapter.location);
+// 					}
 
 					paintProps.forEach(function(prop) {
 						var opac = p
