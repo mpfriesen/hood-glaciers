@@ -15,7 +15,7 @@
 		center: [-121.72317526723423,45.35724290454331],
 		pitch: 71.5,
 		bearing: 48,
-		style: 'mapbox://styles/mapbox/standard'
+		style: 'mapbox://styles/mapbox/standard-satellite'
 	// 	style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y'
 	});
 	
@@ -74,7 +74,10 @@
 		
 	
 	
-	storymap.on('load', () => {
+	Promise.all([
+		new Promise(r => map.on('load', r)),
+		new Promise(r => storymap.on('load', r))
+	]).then(() => {
 		storymap.scrollZoom.disable();
 		map.addSource('mapbox-dem', dem);
 		storymap.addSource('mapbox-dem', dem);
@@ -89,9 +92,10 @@
 		map.addControl(new mapboxgl.NavigationControl({"padding-top": 30 }));
 		map.addControl(new mapboxgl.FullscreenControl());
 		// add a sky layer that will show when the map is highly pitched
-		map.addLayer(sky);
+		// map.addLayer(sky);
 		map.addLayer({
 			'id': 'glac_56',
+			slot: 'middle',
 			type: 'line',
 			source: 'glaciers',
 			layout: {'line-join': 'round'},
@@ -105,6 +109,7 @@
 		});
 		map.addLayer({
 			'id': 'glac_56_fill',
+			slot: 'middle',
 			type: 'fill',
 			source: 'glaciers',
 			layout: {'visibility': 'visible'},
@@ -140,6 +145,7 @@
 		
 		map.addLayer({
 			'id': 'glac_21',
+			slot: 'middle',
 			type: 'line',
 			source: 'glaciers_new',
 			layout: { 'line-join': 'round', 'visibility': 'none'},
@@ -153,6 +159,7 @@
 		});
 		map.addLayer({
 			'id': 'glac_21_fill',
+			slot: 'middle',
 			type: 'fill',
 			source: 'glaciers_new',
 			layout: { 'visibility': 'none'},
@@ -185,9 +192,9 @@
 			}
 		});
 		
-		map.setFog(fog);
-		storymap
-			.setFog(fog)
+		// map.setFog(fog);
+		// storymap
+		// 	.setFog(fog)
 			// .setPaintProperty('zigzag-56_fill', 'fill-color', '#2188aa')
 			// .setPaintProperty('zigzag-56_fill', 'fill-opacity', .3)
 			;
