@@ -15,7 +15,8 @@
 		center: [-121.72317526723423,45.35724290454331],
 		pitch: 71.5,
 		bearing: 48,
-		style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y'
+		style: 'mapbox://styles/mapbox/standard'
+	// 	style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y'
 	});
 	
 	const storymap = new mapboxgl.Map({
